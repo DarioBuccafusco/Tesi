@@ -19,11 +19,11 @@ import it.asirchia.utils.gps.simulator.utils.GeoHelper;
 
 public class GPSsimulator {
 
-	public static final double SIMULATOR_MOVEMENT_SPEED = 0.000015; // ~0.05m - 0.1m per step
-	public static final double ARRIVAL_RADIUS_IN_KM = 0.05 / 1000;  // 0.05m
+	public static final double SIMULATOR_MOVEMENT_SPEED = 0.0001	; // ~0.05m - 0.1m per step 0.0015km 1,5m/s => 0.0001 10m/s
+	public static final double ARRIVAL_RADIUS_IN_KM = 0.33 / 1000;  // 0.05m => 0.33
 	
 	private boolean repeat = false;
-	private boolean finished = false;
+	private boolean finished = false; 			
 
 	public JSONArray route = new JSONArray();
 	public Location currentLocation;    
@@ -64,7 +64,7 @@ public class GPSsimulator {
 		waypointCounter++;
 	}
     
-	public void move() throws IOException, JSONException{
+	public void move(String muuid) throws IOException, JSONException{
 		
 		
     			
@@ -93,8 +93,10 @@ public class GPSsimulator {
     	
     	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     	
-    	coordinates.put("path", "test");
-    	coordinates.put("resource_id", "autobus_palermo_00");
+    	coordinates.put("service","palermo" );
+    	coordinates.put("servicepath", "/autobus_palermo");
+    	coordinates.put("resource_id", "109");
+    	coordinates.put("muuid", muuid);
     	coordinates.put("timeslot", timestamp);
     	coordinates.put("lat", currentLocation.latitude);
     	coordinates.put("lon", currentLocation.longitude);
